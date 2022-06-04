@@ -16,6 +16,10 @@ variable "ssh_public_key" {
   default = ""
 }
 
+variable "slade_home_ip" {
+ default = ""
+}
+
 variable "client_id" {
   default = ""
 }

@@ -11,7 +11,7 @@ resource "azurerm_network_security_group" "nsg-bastion" {
     protocol                   = "Tcp"
     source_port_range          = "*"
     destination_port_range     = "443"
-    source_address_prefix      = "172.125.57.122"
+    source_address_prefix      = var.slade_home_ip
     destination_address_prefix = "*"
   }
 
