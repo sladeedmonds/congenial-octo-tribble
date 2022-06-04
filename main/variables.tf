@@ -1,0 +1,21 @@
+variable "aks_prefix" {
+  default       = "aks"
+  description   = "Prefix of the AKS instance."
+}
+
+variable "resource_group_location" {
+  default = "eastus"
+  description   = "Location of the resource group."
+}
+
+variable "ssh_public_key" {
+  default = ""
+}
+
+variable "client_id" {
+  default = ""
+}
+
+variable "client_secret" {
+  default = ""
+}
