@@ -22,6 +22,8 @@ provider "azurerm" {
   features {}
 } 
 
+data "azurerm_client_config" "current" {}
+
 resource "random_pet" "aks" {
   prefix    = var.aks_prefix
 }
