@@ -1,17 +1,15 @@
+resource "random_pet" "kv" {
+  prefix    = var.kv_prefix
+}
+
 resource "azurerm_resource_group" "rg-keyvault" {
   name = "rg-sandbox-keyvault"
   location  = var.resource_group_location
   }
 
-resource "azurerm_bastion_host" "bastion-default" {
-  name                = "bastion-default"
-  location            = azurerm_resource_group.rg-networking.location
-  resource_group_name = azurerm_resource_group.rg-networking.name
-  sku = "Standard"
-
-  ip_configuration {
-    name                 = "configuration"
-    subnet_id            = azurerm_subnet.subnet-bastion.id
-    public_ip_address_id = azurerm_public_ip.vip-bastion.id
+resource "azurerm_key_vault" "bastion-default" {
+  name                = "${random_pet.kv.id}"
+  location            = azurerm_resource_group.rg-keyvault.location
+  resource_group_name = azurerm_resource_group.rg-keyvault.name
+  sku_name = "standard"
   }
-}

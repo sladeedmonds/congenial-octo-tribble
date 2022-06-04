@@ -3,6 +3,10 @@ variable "aks_prefix" {
   description   = "Prefix of the AKS instance."
 }
 
+variable "kv_prefix" {
+  default = "kv"
+}
+
 variable "resource_group_location" {
   default = "eastus"
   description   = "Location of the resource group."
