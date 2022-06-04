@@ -44,7 +44,7 @@ jobs:
         ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
         ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
       if: github.event_name == 'pull_request'
-      run: terraform plan -var="client_id=${{ secrets.TF_VAR_CLIENT_ID }}" -var="client_secret=${{ secrets.TF_VAR_CLIENT_SECRET }}" -var="ssh_public_key=${{ secrets.TF_VAR_SSH_PUBLIC_KEY }}" -var="slade_home_ip=${{ secrets.TF_VAR_SLADE_HOME_IP }}" -no-color
+      run: terraform plan -var="client_id=${{ secrets.ARM_CLIENT_ID }}" -var="client_secret=${{ secrets.ARM_CLIENT_SECRET }}" -var="ssh_public_key=${{ secrets.TF_VAR_SSH_PUBLIC_KEY }}" -var="slade_home_ip=${{ secrets.SLADE_HOME_IP }}" -no-color
 
     # Add a comment to pull requests with plan results
     - name: add-plan-comment
@@ -84,4 +84,4 @@ jobs:
         ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
         ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
         ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-      run: terraform apply -var="client_id=${{ secrets.TF_VAR_CLIENT_ID }}" -var="client_secret=${{ secrets.TF_VAR_CLIENT_SECRET }}" -var="ssh_public_key=${{ secrets.TF_VAR_SSH_PUBLIC_KEY }}" -var="slade_home_ip=${{ secrets.SLADE_HOME_IP }}" -no-color -auto-approve
+      run: terraform apply -var="client_id=${{ secrets.ARM_CLIENT_ID }}" -var="client_secret=${{ secrets.ARM_CLIENT_SECRET }}" -var="ssh_public_key=${{ secrets.TF_VAR_SSH_PUBLIC_KEY }}" -var="slade_home_ip=${{ secrets.SLADE_HOME_IP }}" -no-color -auto-approve
