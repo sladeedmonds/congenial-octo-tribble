@@ -15,7 +15,7 @@ resource "azurerm_network_security_group" "nsg-bastion" {
     destination_address_prefix = "*"
   }
 
-security_rule {
+  security_rule {
     name                       = "AllowGatewayManager"
     priority                   = 110
     direction                  = "Inbound"
@@ -27,14 +27,14 @@ security_rule {
     destination_address_prefix = "*"
   }
 
-security_rule {
+  security_rule {
     name                       = "AllowDataplane"
     priority                   = 120
     direction                  = "Inbound"
     access                     = "Allow"
     protocol                   = "Tcp"
     source_port_range          = "*"
-    destination_port_ranges     = [8080, 5071]
+    destination_port_ranges    = [8080, 5071]
     source_address_prefix      = "VirtualNetwork"
     destination_address_prefix = "VirtualNetwork"
   }

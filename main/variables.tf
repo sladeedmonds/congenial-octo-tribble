@@ -1,6 +1,6 @@
 variable "aks_prefix" {
-  default       = "aks"
-  description   = "Prefix of the AKS instance."
+  default     = "aks"
+  description = "Prefix of the AKS instance."
 }
 
 variable "kv_prefix" {
@@ -8,8 +8,8 @@ variable "kv_prefix" {
 }
 
 variable "resource_group_location" {
-  default = "eastus"
-  description   = "Location of the resource group."
+  default     = "eastus"
+  description = "Location of the resource group."
 }
 
 variable "ssh_public_key" {
@@ -17,7 +17,7 @@ variable "ssh_public_key" {
 }
 
 variable "slade_home_ip" {
- default = ""
+  default = ""
 }
 
 variable "client_id" {
