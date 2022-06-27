@@ -51,10 +51,10 @@ jobs:
     - name: Terraform plan 
       id: plan
       env:
-        ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-        ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-        ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-        ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+        ARM_CLIENT_ID: ${{ steps.azurekeyvault.outputs.ARMClientId }}
+        ARM_CLIENT_SECRET: ${{ steps.azurekeyvault.outputs.ARMClientSecret }}
+        ARM_TENANT_ID: ${{ steps.azurekeyvault.outputs.ARMTenantId }}
+        ARM_SUBSCRIPTION_ID: ${{ steps.azurekeyvault.outputs.ARMSubscriptionId }}
       if: github.event_name == 'pull_request'
       run: terraform plan -var="client_id=${{ secrets.ARM_CLIENT_ID }}" -var="client_secret=${{ secrets.ARM_CLIENT_SECRET }}" -var="ssh_public_key=${{ secrets.SSH_PUBLIC_KEY }}" -var="slade_home_ip=${{ secrets.SLADE_HOME_IP }}" -no-color
 
@@ -92,8 +92,8 @@ jobs:
     - name: Terraform Apply
       if: github.ref == 'refs/heads/master' && github.event_name == 'push'
       env:
-        ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-        ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-        ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-        ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+        ARM_CLIENT_ID: ${{ steps.azurekeyvault.outputs.ARMClientId }}
+        ARM_CLIENT_SECRET: ${{ steps.azurekeyvault.outputs.ARMClientSecret }}
+        ARM_TENANT_ID: ${{ steps.azurekeyvault.outputs.ARMTenantId }}
+        ARM_SUBSCRIPTION_ID: ${{ steps.azurekeyvault.outputs.ARMSubscriptionId }}
       run: terraform apply -var="client_id=${{ secrets.ARM_CLIENT_ID }}" -var="client_secret=${{ secrets.ARM_CLIENT_SECRET }}" -var="ssh_public_key=${{ secrets.SSH_PUBLIC_KEY }}" -var="slade_home_ip=${{ secrets.SLADE_HOME_IP }}" -no-color -auto-approve
