@@ -26,7 +26,7 @@ jobs:
       uses: Azure/get-keyvault-secrets@v1
       with:
         keyvault: "kv-tolerant-sawfly"
-        secrets: 'ARMClientId, ARMClientSecret'
+        secrets: 'ARMClientId, ARMClientSecret, ARMTenantId, ARMSubscriptionId, TerraformResourceGroup, TerraformStorageAccount, TerraformContainerName, TerraformStateFile'
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2
       with:
@@ -39,13 +39,13 @@ jobs:
       id: init
       env:
         ARM_CLIENT_ID: ${{ steps.azurekeyvault.outputs.ARMClientId }}
-        ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
-        ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-        ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-        RESOURCE_GROUP: ${{ secrets.RESOURCE_GROUP }}
-        STORAGE_ACCOUNT: ${{ secrets.STORAGE_ACCOUNT }}
-        CONTAINER_NAME: ${{ secrets.CONTAINER_NAME }}
-        TF_BACKEND_STATE_KEY: ${{ secrets.TF_BACKEND_STATE_KEY }}
+        ARM_CLIENT_SECRET: ${{ secrets.ARMClientSecret }}
+        ARM_TENANT_ID: ${{ secrets.ARMTenantId }}
+        ARM_SUBSCRIPTION_ID: ${{ secrets.ARMSubscriptionId }}
+        RESOURCE_GROUP: ${{ secrets.TerraformResourceGroup }}
+        STORAGE_ACCOUNT: ${{ secrets.TerraformStorageAccount }}
+        CONTAINER_NAME: ${{ secrets.TerraformContainerName }}
+        TF_BACKEND_STATE_KEY: ${{ secrets.TerraformStateFile }}
       run: terraform init -backend-config="storage_account_name=$STORAGE_ACCOUNT" -backend-config="container_name=$CONTAINER_NAME" -backend-config="key=$TF_BACKEND_STATE_KEY" -backend-config="resource_group_name=$RESOURCE_GROUP"
 
     - name: Terraform plan 
