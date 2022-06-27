@@ -39,8 +39,8 @@ resource "azurerm_virtual_network_gateway_connection" "vng_connection_home" {
   resource_group_name = azurerm_resource_group.rg-networking.name
 
   type = "IPsec"
-  virtual_network_gateway_id = azurerm_virtual_network_gateway.vnetgw_default
-  local_network_gateway_id = azurerm_local_network_gateway.lng_home
+  virtual_network_gateway_id = azurerm_virtual_network_gateway.vnetgw_default.id
+  local_network_gateway_id = azurerm_local_network_gateway.lng_home.id
 
   shared_key = var.psk_sandbox
 }
