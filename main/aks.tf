@@ -1,8 +1,25 @@
+locals {
+  common_tags = {
+    environment = var.environment
+    owneralias = var.owner_alias
+    automation = var.automation
+  }
+}
+
+resource "azurerm_resource_group" "rg-aks" {
+  name     = "rg-aks-${var.environment}"
+  location = var.resource_group_location
+}
+
+resource "random_pet" "aks" {
+  prefix = var.aks_prefix
+}
+
 resource "azurerm_kubernetes_cluster" "aks-lab" {
   name                = random_pet.aks.id
   location            = azurerm_resource_group.rg-aks.location
   resource_group_name = azurerm_resource_group.rg-aks.name
-  dns_prefix          = "${random_pet.aks.id}-k8s"
+  dns_prefix          = "${random_pet.aks.id}-k8s-${var.environment}"
 
   linux_profile {
     admin_username = "slade"
@@ -28,9 +45,5 @@ resource "azurerm_kubernetes_cluster" "aks-lab" {
     network_plugin    = "azure"
   }
 
-  tags = {
-    environment = "lab"
-    deployedBy  = "terraform"
-    msftalias   = "sladeedmonds"
-  }
+  tags = local.common_tags
 }

@@ -1,3 +1,15 @@
+variable "environment" {
+  default = "sandbox"
+}
+
+variable "owner_alias" {
+  default = "sladeedmonds"
+}
+
+variable "automation" {
+  default = "terraform"
+}
+
 variable "aks_prefix" {
   default     = "aks"
   description = "Prefix of the AKS instance."
@@ -7,7 +19,7 @@ variable "kv_prefix" {
   default = "kv"
 }
 
-variable "resource_group_location" {
+variable "region_primary" {
   default     = "eastus"
   description = "Location of the resource group."
 }

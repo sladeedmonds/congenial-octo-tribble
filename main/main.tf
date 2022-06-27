@@ -23,12 +23,3 @@ provider "azurerm" {
 }
 
 data "azurerm_client_config" "current" {}
-
-resource "random_pet" "aks" {
-  prefix = var.aks_prefix
-}
-
-resource "azurerm_resource_group" "rg-aks" {
-  name     = "rg-aks"
-  location = var.resource_group_location
-}

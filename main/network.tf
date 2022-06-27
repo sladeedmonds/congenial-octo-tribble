@@ -1,5 +1,5 @@
 resource "azurerm_resource_group" "rg-networking" {
-  name     = "rg-networking"
+  name     = "rg-networking-sandbox"
   location = "eastus"
 }
 
@@ -10,7 +10,7 @@ resource "azurerm_network_security_group" "nsg-default" {
 }
 
 resource "azurerm_virtual_network" "vnet-default" {
-  name                = "vnet-default"
+  name                = "vnet-sandbox"
   location            = azurerm_resource_group.rg-networking.location
   resource_group_name = azurerm_resource_group.rg-networking.name
   address_space       = ["10.10.0.0/16"]
@@ -18,7 +18,7 @@ resource "azurerm_virtual_network" "vnet-default" {
 }
 
 resource "azurerm_public_ip" "vip-bastion" {
-  name                = "vip-bastion"
+  name                = "vip-bastion-sandbox"
   location            = azurerm_resource_group.rg-networking.location
   resource_group_name = azurerm_resource_group.rg-networking.name
   allocation_method   = "Static"
@@ -45,4 +45,3 @@ resource "azurerm_subnet" "subnet-bastion" {
   resource_group_name  = azurerm_resource_group.rg-networking.name
   address_prefixes     = ["10.10.254.0/27"]
 }
-

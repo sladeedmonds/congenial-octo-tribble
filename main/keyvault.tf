@@ -3,7 +3,7 @@ resource "random_pet" "kv" {
 }
 
 resource "azurerm_resource_group" "rg-keyvault" {
-  name     = "rg-sandbox-keyvault"
+  name     = "rg-keyvault-${var.environment}"
   location = var.resource_group_location
 }
 
