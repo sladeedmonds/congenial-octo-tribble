@@ -32,3 +32,15 @@ resource "azurerm_local_network_gateway" "lng_home" {
   gateway_address = var.slade_home_ip
   address_space = ["${var.slade_home_network}"]
 }
+
+resource "azurerm_virtual_network_gateway_connection" "vng_connection_home" {
+  name = "onprem"
+  location = azurerm_resource_group.rg-networking.location
+  resource_group_name = azurerm_resource_group.rg-networking.name
+
+  type = "IPsec"
+  virtual_network_gateway_id = azurerm_virtual_network_gateway.vnetgw_default
+  local_network_gateway_id = azurerm_local_network_gateway.lng_home
+
+  shared_key = var.psk_sandbox
+}

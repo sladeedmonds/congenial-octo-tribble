@@ -36,6 +36,10 @@ variable "slade_home_network" {
   default = ""
 }
 
+variable "psk_sandbox" {
+  default = ""
+}
+
 variable "client_id" {
   default = ""
 }
