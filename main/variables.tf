@@ -32,6 +32,10 @@ variable "slade_home_ip" {
   default = ""
 }
 
+variable "slade_home_network" {
+  default = ""
+}
+
 variable "client_id" {
   default = ""
 }

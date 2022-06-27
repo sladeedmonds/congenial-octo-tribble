@@ -24,3 +24,11 @@ resource "azurerm_virtual_network_gateway" "vnetgw_default" {
 	subnet_id = azurerm_subnet.subnet-vnetgw.id
   }
 }
+
+resource "azurerm_local_network_gateway" "lng_home" {
+  name = "local-gateway-home-${var.environment}"
+  location = azurerm_resource_group.rg-networking.location
+  resource_group_name = azurerm_resource_group.rg-networking.name
+  gateway_address = var.slade_home_ip
+  address_space = ["${var.slade_home_network}"]
+}
