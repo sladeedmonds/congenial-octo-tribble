@@ -6,7 +6,7 @@ resource "random_string" "tf-storage-name" {
 
 resource "azurerm_resource_group" "rg-tf-state" {
   name     = "rg-tf-state"
-  location = var.resource_group_location
+  location = var.region_primary
 }
 
 resource "azurerm_storage_account" "tf-storage" {

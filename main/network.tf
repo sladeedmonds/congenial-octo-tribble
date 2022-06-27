@@ -1,5 +1,5 @@
 resource "azurerm_resource_group" "rg-networking" {
-  name     = "rg-networking-sandbox"
+  name     = "rg-networking-${var.environment}"
   location = "eastus"
 }
 
@@ -10,7 +10,7 @@ resource "azurerm_network_security_group" "nsg-default" {
 }
 
 resource "azurerm_virtual_network" "vnet-default" {
-  name                = "vnet-sandbox"
+  name                = "vnet-${var.environment}"
   location            = azurerm_resource_group.rg-networking.location
   resource_group_name = azurerm_resource_group.rg-networking.name
   address_space       = ["10.10.0.0/16"]

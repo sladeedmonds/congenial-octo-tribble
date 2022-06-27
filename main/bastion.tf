@@ -1,5 +1,5 @@
 resource "azurerm_bastion_host" "bastion-default" {
-  name                = "bastion-${var.env_sandbox}"
+  name                = "bastion-${var.environment}"
   location            = azurerm_resource_group.rg-networking.location
   resource_group_name = azurerm_resource_group.rg-networking.name
   sku                 = "Standard"

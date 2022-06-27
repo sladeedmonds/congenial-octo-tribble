@@ -8,7 +8,7 @@ locals {
 
 resource "azurerm_resource_group" "rg-aks" {
   name     = "rg-aks-${var.environment}"
-  location = var.resource_group_location
+  location = var.region_primary
 }
 
 resource "random_pet" "aks" {
