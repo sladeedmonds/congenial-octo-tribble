@@ -55,8 +55,9 @@ jobs:
         ARM_CLIENT_SECRET: ${{ steps.azurekeyvault.outputs.ARMClientSecret }}
         ARM_TENANT_ID: ${{ steps.azurekeyvault.outputs.ARMTenantId }}
         ARM_SUBSCRIPTION_ID: ${{ steps.azurekeyvault.outputs.ARMSubscriptionId }}
+        TF_VAR_slade_home_ip: ${{ steps.azurekeyvault.outputs.SladeHomeIp}}
       if: github.event_name == 'pull_request'
-      run: terraform plan -var="client_id=${{ secrets.ARM_CLIENT_ID }}" -var="client_secret=${{ secrets.ARM_CLIENT_SECRET }}" -var="ssh_public_key=${{ secrets.SSH_PUBLIC_KEY }}" -var="slade_home_ip=${{ steps.azurekeyvault.outputs.SladeHomeIp }}" -var="slade_home_network=${{ steps.azurekeyvault.outputs.SladeHomeNetwork }}" -no-color
+      run: terraform plan -var="client_id=${{ secrets.ARM_CLIENT_ID }}" -var="client_secret=${{ secrets.ARM_CLIENT_SECRET }}" -var="ssh_public_key=${{ secrets.SSH_PUBLIC_KEY }}" -var="slade_home_ip=$TF_VAR_SLADE_HOME_IP" -var="slade_home_network=${{ steps.azurekeyvault.outputs.SladeHomeNetwork }}" -no-color
 
     # Add a comment to pull requests with plan results
     - name: add-plan-comment
@@ -96,4 +97,5 @@ jobs:
         ARM_CLIENT_SECRET: ${{ steps.azurekeyvault.outputs.ARMClientSecret }}
         ARM_TENANT_ID: ${{ steps.azurekeyvault.outputs.ARMTenantId }}
         ARM_SUBSCRIPTION_ID: ${{ steps.azurekeyvault.outputs.ARMSubscriptionId }}
-      run: terraform apply -var="client_id=${{ secrets.ARM_CLIENT_ID }}" -var="client_secret=${{ secrets.ARM_CLIENT_SECRET }}" -var="ssh_public_key=${{ secrets.SSH_PUBLIC_KEY }}" -var="slade_home_ip=${{ steps.azurekeyvault.outputs.SladeHomeIp }}" -var="slade_home_network=${{ steps.azurekeyvault.outputs.SladeHomeNetwork }}" -no-color -auto-approve
+        TF_VAR_slade_home_ip: ${{ steps.azurekeyvault.outputs.SladeHomeIp}}
+      run: terraform apply -var="client_id=${{ secrets.ARM_CLIENT_ID }}" -var="client_secret=${{ secrets.ARM_CLIENT_SECRET }}" -var="ssh_public_key=${{ secrets.SSH_PUBLIC_KEY }}" -var="slade_home_ip=$TF_VAR_SLADE_HOME_IP" -var="slade_home_network=${{ steps.azurekeyvault.outputs.SladeHomeNetwork }}" -no-color -auto-approve
