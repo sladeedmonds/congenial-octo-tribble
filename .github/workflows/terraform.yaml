@@ -39,13 +39,13 @@ jobs:
       id: init
       env:
         ARM_CLIENT_ID: ${{ steps.azurekeyvault.outputs.ARMClientId }}
-        ARM_CLIENT_SECRET: ${{ secrets.ARMClientSecret }}
-        ARM_TENANT_ID: ${{ secrets.ARMTenantId }}
-        ARM_SUBSCRIPTION_ID: ${{ secrets.ARMSubscriptionId }}
-        RESOURCE_GROUP: ${{ secrets.TerraformResourceGroup }}
-        STORAGE_ACCOUNT: ${{ secrets.TerraformStorageAccount }}
-        CONTAINER_NAME: ${{ secrets.TerraformContainerName }}
-        TF_BACKEND_STATE_KEY: ${{ secrets.TerraformStateFile }}
+        ARM_CLIENT_SECRET: ${{ steps.azurekeyvault.outputs.ARMClientSecret }}
+        ARM_TENANT_ID: ${{ steps.azurekeyvault.outputs.ARMTenantId }}
+        ARM_SUBSCRIPTION_ID: ${{ steps.azurekeyvault.outputs.ARMSubscriptionId }}
+        RESOURCE_GROUP: ${{ steps.azurekeyvault.outputs.TerraformResourceGroup }}
+        STORAGE_ACCOUNT: ${{ steps.azurekeyvault.outputs.TerraformStorageAccount }}
+        CONTAINER_NAME: ${{ steps.azurekeyvault.outputs.TerraformContainerName }}
+        TF_BACKEND_STATE_KEY: ${{ steps.azurekeyvault.outputs.TerraformStateFile }}
       run: terraform init -backend-config="storage_account_name=$STORAGE_ACCOUNT" -backend-config="container_name=$CONTAINER_NAME" -backend-config="key=$TF_BACKEND_STATE_KEY" -backend-config="resource_group_name=$RESOURCE_GROUP"
 
     - name: Terraform plan 
