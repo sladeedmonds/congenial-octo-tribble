@@ -1,5 +1,5 @@
 resource "azurerm_public_ip" "pip_vnetgw" {
-  name = "pip-${azurerm_virtual_network_gateway.vnetgw_default.name}"
+  name = "pip-vnetgw-sandbox"
   resource_group_name = azurerm_resource_group.rg-networking.name
   location = azurerm_resource_group.rg-networking.location
   allocation_method = "Static"
