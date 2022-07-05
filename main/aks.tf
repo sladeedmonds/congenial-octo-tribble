@@ -1,8 +1,8 @@
 locals {
   common_tags = {
     environment = var.environment
-    owneralias = var.owner_alias
-    automation = var.automation
+    owneralias  = var.owner_alias
+    automation  = var.automation
   }
 }
 
