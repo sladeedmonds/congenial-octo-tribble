@@ -4,7 +4,7 @@ resource "random_string" "tf-storage-name" {
   special = false
 }
 
-resource "random_string" "aks-storage-sandbox"
+resource "random_string" "aks-storage-sandbox" {
   length = 23
   upper  = false
   special = false
