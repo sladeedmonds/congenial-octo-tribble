@@ -35,6 +35,6 @@ resource "azurerm_storage_account" "aks-storage-sandbox" {
   account_replication_type = "GRS"
 
   tags = {
-    deployedBy = Terraform
+    deployedBy = "Terraform"
   }
 }
