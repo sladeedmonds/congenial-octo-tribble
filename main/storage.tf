@@ -38,3 +38,9 @@ resource "azurerm_storage_account" "aks-storage-sandbox" {
     deployedBy = "Terraform"
   }
 }
+
+resource "azurerm_storage_share" "share-aks-sandbox" {
+  name = "sandbox"
+  storage_account_name = azurerm_storage_account.aks-storage-sandbox.name
+  quota = 50
+}
